@@ -799,6 +799,58 @@ FBFBFFBRLR
 FFBBBBFRLL
 `;
 
+/////////////////////////////////////////////////////////////////////////////////////////////
+//PART 1
+const responseText = sample;
+const boardingPasses = responseText.trim().split('\n');
+const legend = { B: 1, F: 0, R: 1, L: 0 };
+
+const responseText = sample;
+const boardingPasses = responseText.trim().split('\n');
+const legend = { B: 1, F: 0, R: 1, L: 0 };
+
+const processBoardingPassOPT = (pass) => 
+  parseInt(
+    pass.replace(/./g, (char) => char in legend ? legend[char] : ""), 
+    2
+  );
+
+console.log(boardingPasses.map(processBoardingPassOPT).sort((a, b) => b - a));
+// ^^  above is same as below  /////////////////////////////////////////////////////////////
+const processBoardingPass = (pass) => {
+  const binary = pass.replace(/./g, char => char in legend ? legend[char] : "");
+  const seatId = parseInt(binary, 2);
+
+  return seatId;
+}
+console.log(boardingPasses.map(processBoardingPass).sort((a, b) => b - a));
+
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// intial code
+// const responseText = sample;
+// const boardingPasses = responseText.trim().split('\n');
+// const columnLegend = { R: 1, L: 0 };
+// const rowLegend = { B: 1, F: 0 };
+// //for each boarding pass
+// const processBoardingPass = (pass) => {
+// //divide into row and col
+//   const rowPart =  pass.slice(0, 7);
+//   const columnPart = pass.slice(7);
+// //for each partt, convert to binary
+//   const rowBinary = rowPart.replace(/./g, char => char in rowLegend ? rowLegend[char] : "")
+//   const columnBinary = columnPart.replace(/./g, char => char in columnLegend ? columnLegend[char] : "");
+// //convert binary to decimal (base 10)
+//   const rowDecimal = parseInt(rowBinary, 2);
+//   const columnDecimal = parseInt(columnBinary, 2);
+// //get seatId by combing these numbers
+//   const seatId = (rowDecimal << 3) + columnDecimal;
+  
+
+//   console.log(rowBinary + columnBinary);
+//   return seatId;
+// }
+//   console.log(boardingPasses.map(processBoardingPass));
 
 // PART 1 /////////////////////////////////////////////////////////////////////////////
 const allPasses = () => {
