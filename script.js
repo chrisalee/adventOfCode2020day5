@@ -799,6 +799,25 @@ FBFBFFBRLR
 FFBBBBFRLL
 `;
 
+// PART 2 //////////////////////////////////////////////////////////////////////////////////
+const responseText = sample;
+const boardingPasses = responseText.trim().split('\n');
+const legend = { B: 1, F: 0, R: 1, L: 0 };
+
+const processBoardingPassOPT = (pass) => 
+  parseInt(
+    pass.replace(/./g, (char) => char in legend ? legend[char] : ""), 
+    2
+  );
+
+const seatIds = boardingPasses.map(processBoardingPassOPT);
+const sortedIds = [...seatIds].sort((a, b) => a - b);
+const idSet = new Set(seatIds);
+const candidates = seatIds.filter(
+  (id) => idSet.has(id + 2) && !idSet.has(id + 1)
+);
+console.log(parseInt(candidates) + 1);
+
 /////////////////////////////////////////////////////////////////////////////////////////////
 //PART 1
 const responseText = sample;
